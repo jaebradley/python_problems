@@ -25,5 +25,5 @@ def alphabetize(value):
 
     return ''.join(
         char * counts[char]
-        for char in chain(*zip(string.ascii_uppercase, string.ascii_lowercase))
+        for char in chain.from_iterable(zip(string.ascii_uppercase, string.ascii_lowercase))
     )
