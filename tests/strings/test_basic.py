@@ -1,11 +1,19 @@
+"""
+Unit Test for strings.basic problems
+"""
+
 from unittest import TestCase
 
 from src.strings.basic import alphabetize
 
 
 class TestAlphabetize(TestCase):
-    def test_should_return_alphabetically_ordered_string(self):
-        self.assertEqual('eHLlo', alphabetize('HelLo'))
+    """
+    Unit Test for alphabetize method
+    """
 
     def test_should_return_alphabet(self):
-        self.assertEqual('aBcDeFgHiJkLmNoPqRsTuVwXyZ', alphabetize('ZyXwVuTsRqPoNmLkJiHgFeDcBa'))
+        """
+        Test alphabetize method using every uppercase and lowercase character
+        """
+        self.assertEqual('aBbcDeFgHiJkLmNoPqRsTuVwXyZ', alphabetize('ZyXwVuTsRqPoNmLkJiHgFeDcBba'))
