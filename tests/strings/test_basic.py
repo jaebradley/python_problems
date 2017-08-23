@@ -4,7 +4,7 @@ Unit Test for strings.basic problems
 
 from unittest import TestCase
 
-from src.strings.basic import alphabetize
+from strings import alphabetize
 
 
 class TestAlphabetize(TestCase):
