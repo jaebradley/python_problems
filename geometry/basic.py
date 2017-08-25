@@ -4,6 +4,9 @@ Basic geometric problems
 
 
 class Triangle:
+    """
+    Represents a Triangle
+    """
     def __init__(self, longest_side, middle_side, shortest_side):
         self.longest_side = longest_side
         self.middle_side = middle_side
@@ -42,7 +45,7 @@ def identify_maximum_perimeter_triangle(values):
 
     for index in range(len(sorted_values) - 1, 1, -1):
         if sorted_values[index] < sorted_values[index - 1] + sorted_values[index - 2]:
-            return Triangle(
-                    longest_side=sorted_values[index], middle_side=sorted_values[index - 1], shortest_side=sorted_values[index - 2])
+            return Triangle(longest_side=sorted_values[index], middle_side=sorted_values[index - 1],
+                            shortest_side=sorted_values[index - 2])
 
     return None
