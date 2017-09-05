@@ -43,8 +43,10 @@ def do_line_segments_intersect(line_segment_1, line_segment_2):
 
 def calculate_point_triplet_orientation(coordinate_1, coordinate_2, coordinate_3):
     """
-    Returns a value that represents if drawing lines from coordinate_1 to coordinate_2 to coordinate_3 occurs in a
-    clockwise (value < 0), counterclockwise (value > 0), or collinear (value = 0) fashion
+    Returns a value that represents if connecting coordinate_1 to coordinate_2 to coordinate_3 occurs in a
+    clockwise (value < 0), counterclockwise (value > 0), or collinear (value = 0) fashion.
+
+    https://en.oxforddictionaries.com/definition/point_triplet
     """
     return (coordinate_2.x - coordinate_1.x) * (coordinate_3.y - coordinate_1.y) - (coordinate_2.y - coordinate_1.y) * (coordinate_3.x - coordinate_1.x)
 
