@@ -4,7 +4,7 @@ Unit Test for geometry.intermediate problems
 
 from unittest import TestCase
 
-from geometry.intermediate import Coordinate, LineSegment, do_line_segments_intersect
+from geometry.intermediate import Coordinate, LineSegment, do_line_segments_intersect, could_line_segment_contain_coordinate
 
 
 class TestLineSegmentsIntersection(TestCase):
@@ -70,3 +70,41 @@ class TestLineSegmentsIntersection(TestCase):
 
         self.assertFalse(do_line_segments_intersect(line_segment_1, line_segment_2))
         self.assertFalse(do_line_segments_intersect(line_segment_2, line_segment_1))
+
+
+class TestCouldLineSegmentContainCoordinate(TestCase):
+
+    def test_line_segment_could_contain_coordinate(self):
+        line_segment_1_start = Coordinate(-1, 0)
+        line_segment_1_end = Coordinate(1, 0)
+        line_segment_1 = LineSegment(line_segment_1_start, line_segment_1_end)
+        coordinate = Coordinate(-1, 0)
+        self.assertTrue(could_line_segment_contain_coordinate(line_segment_1, coordinate))
+
+    def test_line_segment_could_not_contain_too_small_x_value_coordinate(self):
+        line_segment_1_start = Coordinate(-1, 0)
+        line_segment_1_end = Coordinate(1, 0)
+        line_segment_1 = LineSegment(line_segment_1_start, line_segment_1_end)
+        coordinate = Coordinate(-2, 0)
+        self.assertFalse(could_line_segment_contain_coordinate(line_segment_1, coordinate))
+
+    def test_line_segment_could_not_contain_too_large_x_value_coordinate(self):
+        line_segment_1_start = Coordinate(-1, 0)
+        line_segment_1_end = Coordinate(1, 0)
+        line_segment_1 = LineSegment(line_segment_1_start, line_segment_1_end)
+        coordinate = Coordinate(2, 0)
+        self.assertFalse(could_line_segment_contain_coordinate(line_segment_1, coordinate))
+
+    def test_line_segment_could_not_contain_too_small_y_value_coordinate(self):
+        line_segment_1_start = Coordinate(-1, 0)
+        line_segment_1_end = Coordinate(1, 0)
+        line_segment_1 = LineSegment(line_segment_1_start, line_segment_1_end)
+        coordinate = Coordinate(-1, -2)
+        self.assertFalse(could_line_segment_contain_coordinate(line_segment_1, coordinate))
+
+    def test_line_segment_could_not_contain_too_large_y_value_coordinate(self):
+        line_segment_1_start = Coordinate(-1, 0)
+        line_segment_1_end = Coordinate(1, 0)
+        line_segment_1 = LineSegment(line_segment_1_start, line_segment_1_end)
+        coordinate = Coordinate(-1, 2)
+        self.assertFalse(could_line_segment_contain_coordinate(line_segment_1, coordinate))
