@@ -57,7 +57,7 @@ def do_line_segments_intersect(line_segment_1, line_segment_2):
 
 def calculate_point_triplet_orientation(coordinate_1, coordinate_2, coordinate_3):
     """
-    Returns a value that represents the negative sine of the angle created by connecting connecting coordinate_1 to
+    Returns a value that represents the negative sine of the angle created by connecting coordinate_1 to
     coordinate_2 to coordinate_3.
 
     If this connection occurs in a clockwise fashion the value will be negative, counterclockwise will be positive,
