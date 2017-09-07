@@ -115,4 +115,4 @@ class TestCalculatePointTripletOrientation(TestCase):
         """
         Test that three points that form a right angle to the left returns 1
         """
-        self.assertEqual(-1, calculate_point_triplet_orientation(Coordinate(0, -1), Coordinate(0, 0), Coordinate(-1, 0)))
+        self.assertEqual(1, calculate_point_triplet_orientation(Coordinate(0, -1), Coordinate(0, 0), Coordinate(-1, 0)))
