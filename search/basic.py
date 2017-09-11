@@ -1,28 +1,45 @@
-class Node:
-    def __init__(self, value, children):
-        self.value = value
-        self.children = children
+def recursive_dfs(graph, start, visited=None):
+    """
+    Returns a set of visited nodes given a graph that represents a mapping of a node to its children
+    and some start point.
 
+    Is implemented using recursion.
 
-def depth_first_search(root, target, visited=None, nodes=None):
+    :param graph: A dictionary / map of nodes to their children
+    :param start: A starting node
+    :param visited: An optional set of previously visited nodes
+    :return: A set of all visited nodes
+    """
     if visited is None:
         visited = set()
 
-    if nodes is None:
-        nodes = []
+    visited.add(start)
 
-    if root.value == target:
-        return True
+    for child in graph[start] - visited:
+        if child not in visited:
+            recursive_dfs(graph, child, visited)
 
-    visited.add(root.value)
-    nodes.append(root.value)
+    return visited
 
-    for child in root.children:
-        if child.value not in visited:
-            if depth_first_search(child, target, visited, nodes):
-                return True
 
-    nodes.pop()
+def iterative_dfs(graph, start):
+    """
+    Returns a set of visited nodes given a graph that represents a mapping of a node to its children
+    and some start point.
 
-    return False
+    Is implemented by using a stack to keep track of which nodes still need to be evaluated.
 
+    :param graph: A dictionary / map of nodes to their children
+    :param start: A starting node
+    :return:
+    """
+    visited = set()
+    nodes = [start]
+
+    while len(nodes) > 0:
+        node = nodes.pop()
+        if node not in visited:
+            visited.add(node)
+            nodes.extend(graph[node] - visited)
+
+    return visited

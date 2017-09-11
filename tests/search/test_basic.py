@@ -4,31 +4,59 @@ Unit Test for search.basic problems
 
 from unittest import TestCase
 
-from search.basic import Node, depth_first_search
+from search.basic import recursive_dfs, iterative_dfs
 
 
-class TestDepthFirstSearch(TestCase):
+class TestRecursiveDepthFirstSearch(TestCase):
     """
-    Unit Test for Depth First Search implementation
+    Unit Test for recursive Depth First Search implementation
     """
-    def test_search_value_exists(self):
-        """Test returns True"""
-        f = Node(value='F', children={})
-        e = Node(value='E', children={f})
-        c = Node(value='C', children={f})
-        d = Node(value='D', children={})
-        b = Node(value='B', children={d, e})
-        a = Node(value='A', children={b, c})
+    def test_searching_returns_nodes(self):
+        """Test returns expected nodes"""
+        graph = {'A': {'B', 'C'},
+                 'B': {'A', 'D', 'E'},
+                 'C': {'A', 'F'},
+                 'D': {'B'},
+                 'E': {'B', 'F'},
+                 'F': {'C', 'E'}}
 
-        self.assertTrue(depth_first_search(root=a, target='F'))
+        self.assertEqual(recursive_dfs(graph=graph, start='A'), {'A', 'B', 'C', 'D', 'E', 'F'})
 
-    def test_search_value_does_not_exist(self):
-        """Test returns True"""
-        f = Node(value='F', children={})
-        e = Node(value='E', children={f})
-        c = Node(value='C', children={f})
-        d = Node(value='D', children={})
-        b = Node(value='B', children={d, e})
-        a = Node(value='A', children={b, c})
+    def test_searching_cycle_returns_cycle_nodes(self):
+        """Test returns nodes in cycle"""
+        graph = {'A': {'B', 'C'},
+                 'B': {'D'},
+                 'C': {'A', 'F'},
+                 'D': {'B'},
+                 'E': {'B', 'F'},
+                 'F': {'C', 'E'}}
 
-        self.assertFalse(depth_first_search(root=a, target='J'))
+        self.assertEqual(recursive_dfs(graph=graph, start='B'), {'B', 'D'})
+
+
+class TestIterativeDepthFirstSearch(TestCase):
+    """
+    Unit Test for iterative Depth First Search implementation
+    """
+    def test_searching_returns_nodes(self):
+        """Test returns expected nodes"""
+        graph = {'A': {'B', 'C'},
+                 'B': {'A', 'D', 'E'},
+                 'C': {'A', 'F'},
+                 'D': {'B'},
+                 'E': {'B', 'F'},
+                 'F': {'C', 'E'}}
+
+        self.assertEqual(iterative_dfs(graph=graph, start='A'), {'A', 'B', 'C', 'D', 'E', 'F'})
+
+    def test_searching_cycle_returns_cycle_nodes(self):
+        """Test returns nodes in cycle"""
+        graph = {'A': {'B', 'C'},
+                 'B': {'D'},
+                 'C': {'A', 'F'},
+                 'D': {'B'},
+                 'E': {'B', 'F'},
+                 'F': {'C', 'E'}}
+
+        self.assertEqual(iterative_dfs(graph=graph, start='B'), {'B', 'D'})
+
